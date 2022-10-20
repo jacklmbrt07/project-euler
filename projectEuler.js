@@ -56,3 +56,36 @@ function largestPrimeFactor(number) {
 
   return i;
 }
+
+/**Problem 4: Largest palindrome product
+A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+
+Find the largest palindrome made from the product of two n-digit numbers.
+
+ */
+
+function largestPalindromeProduct(n) {
+  let largestProduct = 0;
+  const startValue = 10 ** (n - 1);
+  const finishValue = 10 ** n - 1;
+
+  for (let i = startValue; i < finishValue; i++) {
+    for (let j = startValue + 1; j <= finishValue; j++) {
+      let product = i * j;
+
+      if (product === reverseNum(product) && product > largestProduct) {
+        largestProduct = product;
+      }
+    }
+  }
+
+  function reverseNum(product) {
+    let reverseNum = 0;
+    while (product > 0) {
+      reverseNum = reverseNum * 10 + (product % 10);
+      product = Math.floor(product / 10);
+    }
+    return reverseNum;
+  }
+  return largestProduct;
+}
